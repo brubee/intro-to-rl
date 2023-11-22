@@ -304,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678456, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678458, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger
@@ -328,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425830, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425831, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger
@@ -573,10 +573,11 @@ GameObject:
   - component: {fileID: 375009510}
   - component: {fileID: 375009509}
   - component: {fileID: 375009508}
-  - component: {fileID: 375009512}
-  - component: {fileID: 375009513}
   - component: {fileID: 375009514}
-  - component: {fileID: 375009515}
+  - component: {fileID: 375009513}
+  - component: {fileID: 375009516}
+  - component: {fileID: 375009518}
+  - component: {fileID: 375009517}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -664,22 +665,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &375009512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375009507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955e093c5244c3d47ab3dc3212ea6884, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newXPos: 0
-  XValue: 6
-  speed: 5
-  jumpSpeed: 0
 --- !u!114 &375009513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +678,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensor
-  m_DetectableTags: []
+  m_DetectableTags:
+  - Obstacle
   m_RaysPerDirection: 12
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.5
@@ -722,24 +708,67 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!143 &375009515
-CharacterController:
+--- !u!114 &375009516
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375009507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 40
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b4309fbf266ee4f908fe0d23defd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 10000
+  speed: 5
+--- !u!114 &375009517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375009507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 04000000
+    VectorActionSize: 04000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: PlayGame
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &375009518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375009507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 1
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &386498635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -921,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678456, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678458, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger
@@ -949,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425830, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425831, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger
@@ -1587,7 +1616,7 @@ GameObject:
   - component: {fileID: 1056866896}
   m_Layer: 0
   m_Name: Goal
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1600,7 +1629,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056866895}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -2577,7 +2606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678456, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070396613678458, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger
@@ -2601,7 +2630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425830, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_TagString
-      value: Branch
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6503070397494425831, guid: 01912e33c6b3870408d18de937423d20, type: 3}
       propertyPath: m_IsTrigger

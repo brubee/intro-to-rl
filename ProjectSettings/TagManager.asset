@@ -5,11 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Shrub
-  - Log
-  - Tree
-  - Branch
-  - Sanic
+  - Obstacle
+  - Goal
   layers:
   - Default
   - TransparentFX
