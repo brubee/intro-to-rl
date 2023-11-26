@@ -8,13 +8,15 @@ using Unity.MLAgents.Sensors;
 public class MyAgent : Agent
 {
     Rigidbody rb;
-    public float speed = 5f;
+    public float m_speed = 5f;
+    public float a_speed = 5f;
     private bool isGrounded = true;
 
     private Vector3 startingPos = new Vector3(0f, 1f, -96f);
 
     private float boundXLeft = -6f;
     private float boundXRight = 6f;
+    private float boundY = 2f;
 
     private enum ACTIONS
     {
@@ -26,12 +28,17 @@ public class MyAgent : Agent
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Physics.gravity *= 2;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Translate(Vector3.forward * m_speed * Time.fixedDeltaTime);
     }
 
     public override void OnEpisodeBegin()
     {
         transform.localPosition = startingPos;
+        isGrounded = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -72,22 +79,23 @@ public class MyAgent : Agent
         switch (actionTaken)
         {
             case (int)ACTIONS.NOTHING:
-                transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
                 break;
             case (int)ACTIONS.LEFT:
                 if (transform.localPosition.x >= boundXLeft)
-                    transform.Translate(-Vector3.right * speed * Time.fixedDeltaTime);
+                    transform.Translate(-Vector3.right * a_speed * Time.fixedDeltaTime);
+                AddReward(0.01f);
                 break;
             case (int)ACTIONS.RIGHT:
                 if (transform.localPosition.x <= boundXRight)
-                    transform.Translate(Vector3.right * speed * Time.fixedDeltaTime);
+                    transform.Translate(Vector3.right * a_speed * Time.fixedDeltaTime);
+                AddReward(0.01f);
                 break;
             case (int)ACTIONS.JUMP:
-                if (isGrounded)
+                if (isGrounded && transform.localPosition.y < boundY)
                 {
-                    rb.AddForce(Vector3.up * 11, ForceMode.Impulse);
-                    isGrounded = false;
+                    rb.AddForce(Vector3.up, ForceMode.Impulse);
                 }
+                AddReward(-0.001f);
                 break;
         }
 
@@ -107,7 +115,7 @@ public class MyAgent : Agent
     {
         if (other.tag == "Goal")
         {
-            AddReward(1.0f);
+            AddReward(10.0f);
             // and then I also want to create at least one more different level, which would be loaded in from here, once the agent gets to the goal
             EndEpisode();
         }
