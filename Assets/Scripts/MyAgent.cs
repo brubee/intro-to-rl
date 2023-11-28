@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEngine.SceneManagement;
 
 public class MyAgent : Agent
 {
@@ -17,6 +18,10 @@ public class MyAgent : Agent
     private float boundXLeft = -6f;
     private float boundXRight = 6f;
     private float boundY = 2f;
+
+    private int episodeCounter = 0;
+
+    public GameObject movingEnemy;
 
     private enum ACTIONS
     {
@@ -39,6 +44,8 @@ public class MyAgent : Agent
     {
         transform.localPosition = startingPos;
         isGrounded = true;
+        episodeCounter++;
+        movingEnemy.GetComponent<MovingEnemyController>().enabled = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -107,6 +114,7 @@ public class MyAgent : Agent
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             AddReward(-1.0f);
+            movingEnemy.GetComponent<MovingEnemyController>().enabled = false;
             EndEpisode();
         }
     }
@@ -117,6 +125,7 @@ public class MyAgent : Agent
         {
             AddReward(10.0f);
             // and then I also want to create at least one more different level, which would be loaded in from here, once the agent gets to the goal
+            movingEnemy.GetComponent<MovingEnemyController>().enabled = false;
             EndEpisode();
         }
     }
