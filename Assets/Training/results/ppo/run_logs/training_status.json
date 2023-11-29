@@ -2,40 +2,58 @@
     "PlayGame": {
         "checkpoints": [
             {
-                "steps": 499915,
-                "file_path": "results\\ppo\\PlayGame\\PlayGame-499915.onnx",
-                "reward": 71.70440340042114,
-                "creation_time": 1701014605.1530526,
+                "steps": 499966,
+                "file_path": "results\\ppo\\PlayGame\\PlayGame-499966.onnx",
+                "reward": 67.5818313089284,
+                "creation_time": 1701284043.1663077,
                 "auxillary_file_paths": [
-                    "results\\ppo\\PlayGame\\PlayGame-499915.pt"
+                    "results\\ppo\\PlayGame\\PlayGame-499966.pt"
                 ]
             },
             {
-                "steps": 999881,
-                "file_path": "results\\ppo\\PlayGame\\PlayGame-999881.onnx",
-                "reward": 142.26482558250427,
-                "creation_time": 1701015184.870344,
+                "steps": 999902,
+                "file_path": "results\\ppo\\PlayGame\\PlayGame-999902.onnx",
+                "reward": 67.16477315482639,
+                "creation_time": 1701284627.423175,
                 "auxillary_file_paths": [
-                    "results\\ppo\\PlayGame\\PlayGame-999881.pt"
+                    "results\\ppo\\PlayGame\\PlayGame-999902.pt"
                 ]
             },
             {
-                "steps": 1000009,
-                "file_path": "results\\ppo\\PlayGame\\PlayGame-1000009.onnx",
-                "reward": 142.26482558250427,
-                "creation_time": 1701015184.978371,
+                "steps": 1499997,
+                "file_path": "results\\ppo\\PlayGame\\PlayGame-1499997.onnx",
+                "reward": 86.03653559477434,
+                "creation_time": 1701285215.0371757,
                 "auxillary_file_paths": [
-                    "results\\ppo\\PlayGame\\PlayGame-1000009.pt"
+                    "results\\ppo\\PlayGame\\PlayGame-1499997.pt"
+                ]
+            },
+            {
+                "steps": 1999923,
+                "file_path": "results\\ppo\\PlayGame\\PlayGame-1999923.onnx",
+                "reward": 144.48263104065606,
+                "creation_time": 1701285816.981187,
+                "auxillary_file_paths": [
+                    "results\\ppo\\PlayGame\\PlayGame-1999923.pt"
+                ]
+            },
+            {
+                "steps": 2000307,
+                "file_path": "results\\ppo\\PlayGame\\PlayGame-2000307.onnx",
+                "reward": 144.48263104065606,
+                "creation_time": 1701285817.0922122,
+                "auxillary_file_paths": [
+                    "results\\ppo\\PlayGame\\PlayGame-2000307.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1000009,
+            "steps": 2000307,
             "file_path": "results\\ppo\\PlayGame.onnx",
-            "reward": 142.26482558250427,
-            "creation_time": 1701015184.978371,
+            "reward": 144.48263104065606,
+            "creation_time": 1701285817.0922122,
             "auxillary_file_paths": [
-                "results\\ppo\\PlayGame\\PlayGame-1000009.pt"
+                "results\\ppo\\PlayGame\\PlayGame-2000307.pt"
             ]
         }
     },
