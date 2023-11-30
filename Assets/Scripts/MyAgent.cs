@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class MyAgent : Agent
 {
     Rigidbody rb;
+    private Animator agentAnimator;
+
     public float m_speed = 5f;
     public float a_speed = 5f;
     private bool isGrounded = true;
@@ -32,6 +34,7 @@ public class MyAgent : Agent
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        agentAnimator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -110,18 +113,30 @@ public class MyAgent : Agent
         switch (actionTaken)
         {
             case (int)ACTIONS.NOTHING:
+                agentAnimator.SetBool("isJumping", false);
+                agentAnimator.SetBool("isRunning", true);
                 break;
             case (int)ACTIONS.LEFT:
                 if (transform.localPosition.x >= boundXLeft)
+                {
+                    agentAnimator.SetBool("isJumping", false);
+                    agentAnimator.SetBool("isRunning", true);
                     transform.Translate(-Vector3.right * a_speed * Time.fixedDeltaTime);
+                }
                 break;
             case (int)ACTIONS.RIGHT:
                 if (transform.localPosition.x <= boundXRight)
+                {
+                    agentAnimator.SetBool("isJumping", false);
+                    agentAnimator.SetBool("isRunning", true);
                     transform.Translate(Vector3.right * a_speed * Time.fixedDeltaTime);
+                }
                 break;
             case (int)ACTIONS.JUMP:
                 if (isGrounded && transform.localPosition.y < boundY)
                 {
+                    agentAnimator.SetBool("isJumping", true);
+                    agentAnimator.SetBool("isRunning", false);
                     rb.AddForce(Vector3.up, ForceMode.Impulse);
                 }
                 AddReward(-0.005f);
